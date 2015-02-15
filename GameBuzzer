@@ -1,0 +1,145 @@
+
+int button1 = 0;
+int button2 = 0;
+int button3 = 0;
+int button4 = 0;
+int infinateLoop = true;
+
+void setup()
+  {
+    pinMode(13, OUTPUT);
+    pinMode(1, OUTPUT);
+    pinMode(2, OUTPUT);
+    pinMode(3, OUTPUT);
+    pinMode(4, OUTPUT);
+    
+    pinMode(5, OUTPUT);
+    pinMode(6, OUTPUT);
+    pinMode(7, OUTPUT);
+    pinMode(8, OUTPUT);
+    pinMode(13, OUTPUT); 
+    pinMode(9, INPUT);
+    pinMode(10, INPUT);
+    pinMode(11, INPUT);
+    pinMode(12, INPUT);        
+  }
+  
+void startBuzzer()
+{
+  digitalWrite(13, HIGH);
+}
+void stopBuzzer()
+{
+  delay(1000);
+  digitalWrite(13,LOW);
+}
+
+void shortBuzzer()
+{
+  startBuzzer();
+  delay(200);
+  digitalWrite(13,LOW);
+  delay(20);  
+  startBuzzer();
+  delay(200);
+  digitalWrite(13,LOW);
+}
+
+  
+void loop()
+{
+ 
+  // this section will turn on the 4 LED one at a time
+  digitalWrite(5, HIGH);// turn on first LED
+  digitalWrite(3, HIGH);
+  delay (50);
+  digitalWrite(3, LOW);
+  digitalWrite(5, LOW);// turn off first LED
+  delay (50);
+  digitalWrite(6, HIGH);
+  digitalWrite(4, HIGH);
+  delay (50);
+  digitalWrite(4, LOW);
+  digitalWrite(6, LOW);
+  delay (50);
+  digitalWrite(7, HIGH);
+  digitalWrite(2, HIGH);
+  delay (50);
+  digitalWrite(2, LOW);
+  digitalWrite(7, LOW);
+  delay (50);  
+  digitalWrite(8, HIGH);
+  digitalWrite(1, HIGH);
+  delay (50);
+  digitalWrite(1, LOW);
+  digitalWrite(8, LOW);
+  // end section of flashing the 4 LED
+ 
+ shortBuzzer();
+ 
+  delay (200);
+
+  // turn on the on led
+  digitalWrite(0, HIGH);
+  
+  // these are the 4 buttons.
+  // set their value to HIGH, waiting for them to get pressed and set to LOW
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  digitalWrite(12, HIGH);
+
+
+ 
+  // in this section, we enter an infinate loop waiting for a button to be pressed.
+  while (infinateLoop)
+    {// beginning of loop
+     
+      // collecting current values of buttons on this iteration of the loop
+        button1 = digitalRead(9);
+        button2 = digitalRead(10);
+        button3 = digitalRead(11);
+        button4 = digitalRead(12);
+
+        if (button1 == LOW) //check if pressed. 
+          {
+            startBuzzer();                
+            while(infinateLoop)
+              { 
+                digitalWrite(5, HIGH); // set the LED on
+                digitalWrite(1, HIGH); // set the LED on
+                stopBuzzer();
+              }
+          }
+        if (button2 == LOW)
+          {
+            startBuzzer();
+            while(infinateLoop)
+               { 
+                  digitalWrite(6, HIGH);// set the LED on
+                  digitalWrite(2, HIGH); // set the LED on
+                  stopBuzzer();
+              }
+          }
+        if (button3 == LOW)
+          {
+            startBuzzer();               
+            while(infinateLoop)
+              { 
+                digitalWrite(7, HIGH);// set the LED on
+                digitalWrite(3, HIGH); // set the LED on
+                stopBuzzer();
+              }
+          }
+        if (button4 == LOW)
+          {
+            startBuzzer();                
+            while(infinateLoop)
+               { 
+                digitalWrite(8, HIGH);// set the LED on
+                digitalWrite(4, HIGH); // set the LED on
+                stopBuzzer();
+              }
+          }          
+    }
+}
